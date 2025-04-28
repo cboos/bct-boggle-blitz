@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 
 interface BoggleTimerProps {
-  initialTime: number; // in seconds
+  initialTime: number;
   onTimeout: () => void;
   isRunning: boolean;
   className?: string;
@@ -18,6 +18,14 @@ const BoggleTimer: React.FC<BoggleTimerProps> = ({
 }) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [progress, setProgress] = useState(100);
+
+  // Reset timer when game starts
+  useEffect(() => {
+    if (isRunning) {
+      setTimeLeft(initialTime);
+      setProgress(100);
+    }
+  }, [isRunning, initialTime]);
 
   useEffect(() => {
     if (!isRunning) return;
