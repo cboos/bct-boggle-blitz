@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 254 76% 75%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -97,5 +91,38 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  @font-face {
+    font-family: 'GameFont';
+    src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+@layer components {
+  .boggle-dice {
+    @apply flex items-center justify-center rounded-lg text-2xl font-bold bg-gradient-to-br from-boggle-primary to-boggle-secondary text-white shadow-md transition-all duration-300 select-none cursor-pointer hover:shadow-lg;
+  }
+  
+  .boggle-dice.selected {
+    @apply border-2 border-boggle-accent animate-dice-select;
+  }
+  
+  .boggle-score-table {
+    @apply w-full border-collapse;
+  }
+  
+  .boggle-score-table th, .boggle-score-table td {
+    @apply border border-boggle-secondary p-2 text-left;
+  }
+  
+  .boggle-score-table th {
+    @apply bg-boggle-primary text-white;
+  }
+  
+  .boggle-score-table tr:nth-child(even) {
+    @apply bg-boggle-light;
   }
 }
