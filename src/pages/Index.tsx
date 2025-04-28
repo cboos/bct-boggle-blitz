@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { useToast } from "@/components/ui/use-toast";
 import BoggleBoard from '@/components/BoggleBoard';
@@ -9,6 +8,7 @@ import BoggleControls from '@/components/BoggleControls';
 import BoggleScoreExplainer from '@/components/BoggleScoreExplainer';
 import BoggleRules from '@/components/BoggleRules';
 import { generateBoggleBoard, arePositionsAdjacent, calculateWordScore } from '@/utils/boggleUtils';
+import { isValidWord } from '@/utils/dictionaryUtils';
 
 const GAME_TIME = 180; // 3 minutes in seconds
 
@@ -68,6 +68,15 @@ const Index = () => {
         title: "Word too short",
         description: "Words must be at least 3 letters long.",
       });
+      return;
+    }
+    
+    if (!isValidWord(currentWord)) {
+      toast({
+        title: "Invalid word",
+        description: `"${currentWord}" is not in our dictionary.`,
+      });
+      clearSelection();
       return;
     }
     
